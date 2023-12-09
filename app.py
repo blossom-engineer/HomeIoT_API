@@ -29,6 +29,14 @@ toilet_post_req = api.model(
     }
 )
 
+bedroom_light_req = api.model(
+    'ベッドルームの照明 ON/OFF',
+    {
+        'id': fields.String,
+        'light': fields.Boolean
+    }
+)
+
 @api.route('/toilet')
 class toilet_api(Resource):
     @api.marshal_with(toilet_get_res, code=200, description="")
@@ -37,6 +45,12 @@ class toilet_api(Resource):
 
     @api.expect(toilet_post_req)
     def post(self):
+        return
+    
+@api.route('/bedroom_light')
+class bedroom_light(Resource):
+    @api.expect(bedroom_light_req)
+    def put(self):
         return
     
 if __name__ == '__main__':
